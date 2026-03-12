@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>家計簿アプリ</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div id="tab-content">
+
+<!-- 記録 -->
+<div id="record" class="tab active">
+
+<h2>記録</h2>
+
+<input type="date" id="record-date">
+
+<div>
+<label><input type="radio" name="type" value="income" checked>収入</label>
+<label><input type="radio" name="type" value="expense">支出</label>
+</div>
+
+<div id="category-buttons"></div>
+
+<div id="amount-display">0</div>
+
+<div id="keypad">
+
+<button>1</button>
+<button>2</button>
+<button>3</button>
+
+<button>4</button>
+<button>5</button>
+<button>6</button>
+
+<button>7</button>
+<button>8</button>
+<button>9</button>
+
+<button>0</button>
+<button id="delete">←</button>
+
+</div>
+
+<select id="currency">
+<option>JPY</option>
+<option>TWD</option>
+<option>USD</option>
+<option>EUR</option>
+<option>KRW</option>
+</select>
+
+<button id="save-record">保存</button>
+
+</div>
+
+<!-- 為替 -->
+
+<div id="exchange" class="tab">
+
+<h2>為替</h2>
+
+<div id="exchange-buttons">
+
+<button onclick="loadChart('USDJPY')">USD</button>
+<button onclick="loadChart('TWDJPY')">TWD</button>
+<button onclick="loadChart('EURJPY')">EUR</button>
+<button onclick="loadChart('KRWJPY')">KRW</button>
+
+</div>
+
+<div id="exchange-chart"></div>
+
+</div>
+
+<!-- カレンダー -->
+
+<div id="calendar" class="tab">
+
+<h2>カレンダー</h2>
+
+<div id="calendar-nav">
+
+<button id="prev-month">←</button>
+<span id="calendar-title"></span>
+<button id="next-month">→</button>
+
+</div>
+
+<div id="calendar-grid"></div>
+
+<h3>記録一覧</h3>
+
+<div id="record-history"></div>
+
+</div>
+
+<!-- 分析 -->
+
+<div id="analysis" class="tab">
+
+<h2>分析</h2>
+
+<canvas id="monthly-chart"></canvas>
+
+</div>
+
+<!-- 設定 -->
+
+<div id="settings" class="tab">
+
+<h2>設定</h2>
+
+<button id="export-data">データエクスポート</button>
+<button id="delete-data">データ削除</button>
+
+</div>
+
+</div>
+
+<nav class="bottom-tab">
+
+<button data-tab="record" class="active">記録</button>
+<button data-tab="exchange">為替</button>
+<button data-tab="calendar">カレンダー</button>
+<button data-tab="analysis">分析</button>
+<button data-tab="settings">設定</button>
+
+</nav>
+
+<script src="app.js"></script>
+<script src="calendar.js"></script>
+<script src="exchange.js"></script>
+
+</body>
+</html>
+<script>
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register("service-worker.js")
+
+}
+
+</script>
